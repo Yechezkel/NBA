@@ -5,6 +5,7 @@ from flask import Blueprint, jsonify
 
 from models.details_model import Details
 from models.player_model import Player
+from models.team_model import Team
 
 player_bp = Blueprint('players', __name__)
 
@@ -21,7 +22,7 @@ def get_by_position():
     result_list = [d.to_dict() for d in result]
     result_list = list(map(lambda d: {
             'player_id': Player.query.filter_by(player_id = d["player_id"]).first().player_name,
-            'team_id': Player.query.filter_by(team_id = d["team_id"]).first().team_name,
+            'team_id': Team.query.filter_by(team_id = d["team_id"]).first().team_name,
             'season': d["season"],
             'points': d["points"],
             'position': d["position"],
